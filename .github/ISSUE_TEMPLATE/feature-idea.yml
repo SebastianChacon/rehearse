@@ -1,0 +1,22 @@
+name: Feature idea
+description: Something you missed while studying
+title: 'feat: '
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What were you trying to do when you missed this?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      description: What would solve it? Rough is fine.
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Which phase does it belong to?
+      options: ['Now', 'Later phase', 'Not sure']

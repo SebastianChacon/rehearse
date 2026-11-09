@@ -1,0 +1,24 @@
+name: Bug from dogfooding
+description: Something broke or felt wrong during a study session
+title: 'bug: '
+labels: [bug, dogfooding]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you saw vs. what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open deck ...
+        2. Rate card ...
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: Device, browser, local or deployed
