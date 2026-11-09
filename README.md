@@ -118,8 +118,8 @@ Git as a graph of snapshots (merge vs rebase), trunk-based development, conventi
 
 ### Done when
 
-- [ ] CI blocks a PR that fails lint or type-check
-- [ ] Seed deck has 100+ questions
+- [x] CI blocks a PR that fails lint or type-check
+- [x] Seed deck has 100+ questions
 
 ## Phase 1 — REST API, SQL and the spaced-repetition data model (4 weeks)
 
