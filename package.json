@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "format": "prettier --write .",
-    "format:check": "prettier --check",
+    "format:check": "prettier --check .",
     "dev": "pnpm --filter @rehearse/web dev",
     "build": "pnpm -r build",
     "lint": "oxlint",
