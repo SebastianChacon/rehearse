@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check",
     "dev": "pnpm --filter @rehearse/web dev",
     "build": "pnpm -r build",
     "lint": "oxlint",
@@ -11,6 +13,7 @@
   "devDependencies": {
     "@types/node": "^24.19.2",
     "oxlint": "^1.90.0",
+    "prettier": "^3.9.10",
     "typescript": "~7.0.2"
   }
 }
