@@ -12,7 +12,7 @@ You build Rehearse, an interview-prep app, and you use it every week to study fo
 2. **Build it the hard way once.** Write the spaced-repetition algorithm, the rate limiter and the heap yourself before reaching for libraries.
 3. **Every important decision gets an ADR** in `docs/adr/` (Context, Options, Decision, Consequences). These are your "professional experience" stories.
 4. **Measure before and after.** Latency, query time, cost, retention: a number makes a story believable.
-5. **Dogfood every week.** Do one study session per week in your own app, no matter which phase you're in. Log every bug and missing feature as a GitHub issue *during* the session.
+5. **Dogfood every week.** Do one study session per week in your own app, no matter which phase you're in. Log every bug and missing feature as a GitHub issue _during_ the session.
 
 ### The loop for every phase
 
@@ -21,7 +21,7 @@ You build Rehearse, an interview-prep app, and you use it every week to study fo
 3. Write the ADRs.
 4. Break it on purpose.
 5. Add that phase's interview questions **as cards in your own app** and study them.
-6. Check off *Done when*.
+6. Check off _Done when_.
 
 Step 5 is the trick: from phase 2 on, this doc's interview questions live inside Rehearse, so the app trains you on the exact topics it's built from.
 
@@ -42,12 +42,12 @@ Rehearse is a study app for technical interviews: spaced-repetition flashcards, 
 
 ### Users
 
-| Role | What they do |
-| --- | --- |
-| Learner (free) | Studies decks, tracks streaks, runs DSA problems, a few AI gradings per month |
-| Learner (Pro) | More AI credits: graded spoken answers, AI mock interviews, card generation |
-| Deck author | Publishes public decks (e.g. "System Design 101"); others clone them |
-| Study group owner | Creates a group, invites friends, hosts live quiz rooms |
+| Role              | What they do                                                                  |
+| ----------------- | ----------------------------------------------------------------------------- |
+| Learner (free)    | Studies decks, tracks streaks, runs DSA problems, a few AI gradings per month |
+| Learner (Pro)     | More AI credits: graded spoken answers, AI mock interviews, card generation   |
+| Deck author       | Publishes public decks (e.g. "System Design 101"); others clone them          |
+| Study group owner | Creates a group, invites friends, hosts live quiz rooms                       |
 
 ### Core features (final product)
 
@@ -69,26 +69,26 @@ Phases 0–3: decks, cards, spaced repetition, login, deployed. You start using 
 
 The target is a modular monolith API plus background workers and an isolated code sandbox. Anything slow or risky (transcription, AI grading, running untrusted code) leaves the request path.
 
-> *Diagram: Rehearse target architecture · final state (view it in the original doc)*
+> _Diagram: Rehearse target architecture · final state (view it in the original doc)_
 
 The API only stores data and enqueues jobs. Workers do the slow AI work, and the sandbox runs user code where it can't touch anything else.
 
-| Layer | Choice | Why | Alternative to discuss |
-| --- | --- | --- | --- |
-| Language | TypeScript strict (+ Python inside the sandbox) | Shared Zod types front and back; Python because you practice DSA in it | Go for the runner |
-| Frontend | React + Vite + TanStack Query + PWA | Offline study needs a client-heavy app | Next.js |
-| Styling | Tailwind + shadcn/ui | Accessible primitives | CSS modules |
-| Editor | Monaco (VS Code's editor) | Real IDE feel for DSA | CodeMirror |
-| API | Node + Fastify | Fast, schema-first, WebSocket plugin | Express, NestJS |
-| Database | Postgres on Supabase + Kysely | Real SQL, RLS, pgvector | RDS, Prisma |
-| Auth | Own sessions + Google/GitHub OAuth | Understand auth deeply | Supabase Auth |
-| Cache/queue | Redis + BullMQ | Queues, leaderboards (sorted sets), pub/sub | SQS |
-| Files | S3 + CloudFront | Voice recordings, imports | Supabase Storage |
-| Payments | Stripe subscriptions + credit packs | Usage-based billing is a hot interview topic | Paddle |
-| AI | Speech-to-text API, LLM API, embeddings + pgvector | Grading, mock interviews, card generation | Self-hosted Whisper |
-| Infra | Docker, ECS Fargate, Terraform, GitHub Actions | Containers without servers, infra as code | Kubernetes (lab), Fly.io |
-| Observability | OpenTelemetry, pino, Grafana Cloud, Sentry | Vendor-neutral | Datadog |
-| Testing | Vitest, fast-check, Testcontainers, Playwright | Property tests fit the SRS algorithm | Jest |
+| Layer         | Choice                                             | Why                                                                    | Alternative to discuss   |
+| ------------- | -------------------------------------------------- | ---------------------------------------------------------------------- | ------------------------ |
+| Language      | TypeScript strict (+ Python inside the sandbox)    | Shared Zod types front and back; Python because you practice DSA in it | Go for the runner        |
+| Frontend      | React + Vite + TanStack Query + PWA                | Offline study needs a client-heavy app                                 | Next.js                  |
+| Styling       | Tailwind + shadcn/ui                               | Accessible primitives                                                  | CSS modules              |
+| Editor        | Monaco (VS Code's editor)                          | Real IDE feel for DSA                                                  | CodeMirror               |
+| API           | Node + Fastify                                     | Fast, schema-first, WebSocket plugin                                   | Express, NestJS          |
+| Database      | Postgres on Supabase + Kysely                      | Real SQL, RLS, pgvector                                                | RDS, Prisma              |
+| Auth          | Own sessions + Google/GitHub OAuth                 | Understand auth deeply                                                 | Supabase Auth            |
+| Cache/queue   | Redis + BullMQ                                     | Queues, leaderboards (sorted sets), pub/sub                            | SQS                      |
+| Files         | S3 + CloudFront                                    | Voice recordings, imports                                              | Supabase Storage         |
+| Payments      | Stripe subscriptions + credit packs                | Usage-based billing is a hot interview topic                           | Paddle                   |
+| AI            | Speech-to-text API, LLM API, embeddings + pgvector | Grading, mock interviews, card generation                              | Self-hosted Whisper      |
+| Infra         | Docker, ECS Fargate, Terraform, GitHub Actions     | Containers without servers, infra as code                              | Kubernetes (lab), Fly.io |
+| Observability | OpenTelemetry, pino, Grafana Cloud, Sentry         | Vendor-neutral                                                         | Datadog                  |
+| Testing       | Vitest, fast-check, Testcontainers, Playwright     | Property tests fit the SRS algorithm                                   | Jest                     |
 
 ```
 rehearse/
@@ -104,7 +104,7 @@ Goal: a repo that looks like a team works on it, before any feature.
 ### Build
 
 - pnpm monorepo, TypeScript strict, ESLint + Prettier, pre-commit hooks
-- Protected `main`, PRs only, PR and issue templates, a GitHub Project board with columns *Bug from dogfooding*, *Feature idea*, *Next*, *Doing*, *Done*
+- Protected `main`, PRs only, PR and issue templates, a GitHub Project board with columns _Bug from dogfooding_, _Feature idea_, _Next_, _Doing_, _Done_
 - README, ADR-001 (modular monolith), ADR-002 (monorepo)
 - `seed/decks/`: turn every interview question from your CrewFlow doc into a CSV (`front, back, tags`). This is your first deck and your first real data.
 
@@ -138,15 +138,15 @@ Goal: an API that stores decks, cards and reviews, and answers "what should I st
 
 **Why spaced repetition works.** Memory fades over time on a "forgetting curve". Each time you recall something just before you would forget it, the memory gets stronger and fades more slowly. So the ideal review gaps grow: 1 day, 6 days, 2 weeks, 1 month... An SRS algorithm schedules each card at the moment you're likely to almost forget it.
 
-**SM-2, the classic algorithm.** Each card has an *ease factor* (starts at 2.5) and an *interval*. After a correct answer: first interval 1 day, then 6 days, then `interval × ease`. A good rating raises ease a little; a hard rating lowers it (never below 1.3). A failed card ("Again") resets the interval to 1 and counts a lapse. Later you can compare it with FSRS, a modern algorithm that models memory *stability* and *difficulty* and needs fewer reviews; that comparison is an ADR with numbers from your own review history.
+**SM-2, the classic algorithm.** Each card has an _ease factor_ (starts at 2.5) and an _interval_. After a correct answer: first interval 1 day, then 6 days, then `interval × ease`. A good rating raises ease a little; a hard rating lowers it (never below 1.3). A failed card ("Again") resets the interval to 1 and counts a lapse. Later you can compare it with FSRS, a modern algorithm that models memory _stability_ and _difficulty_ and needs fewer reviews; that comparison is an ADR with numbers from your own review history.
 
 **Content vs state.** A card's text is shared (a public deck has one copy), but its schedule is personal. That's why `cards` and `card_states` are separate tables: thousands of users can study one public deck without copying it. This is normalization with a clear reason, and a strong design answer.
 
 **The study queue query.** `SELECT ... FROM card_states JOIN cards ... WHERE user_id = $1 AND due_at <= now() ORDER BY due_at LIMIT 50`. It runs every time you open the app, so it needs a composite index on `(user_id, due_at)`. You'll measure it with `EXPLAIN ANALYZE` on a million rows in phase 11.
 
-**Immutable review log (event sourcing light).** Never update a review; insert a new row. `card_states` is a *projection* you could rebuild from the log at any time. Benefits: full history for stats, you can replay all reviews through a new algorithm (FSRS) to compare, and offline sync becomes possible (phase 14).
+**Immutable review log (event sourcing light).** Never update a review; insert a new row. `card_states` is a _projection_ you could rebuild from the log at any time. Benefits: full history for stats, you can replay all reviews through a new algorithm (FSRS) to compare, and offline sync becomes possible (phase 14).
 
-**Streaks: a real SQL puzzle.** "How many days in a row did I study?" is the *gaps and islands* problem: group consecutive dates using `date - ROW_NUMBER() OVER (ORDER BY date)`. Time zones matter: a review at 11:30 pm in New Jersey is a different UTC day. Store UTC, compute days in the user's time zone (`AT TIME ZONE`).
+**Streaks: a real SQL puzzle.** "How many days in a row did I study?" is the _gaps and islands_ problem: group consecutive dates using `date - ROW_NUMBER() OVER (ORDER BY date)`. Time zones matter: a review at 11:30 pm in New Jersey is a different UTC day. Store UTC, compute days in the user's time zone (`AT TIME ZONE`).
 
 **Transactions.** `POST /reviews` must insert the review AND update `card_states` atomically. If one fails, both roll back.
 
@@ -240,7 +240,7 @@ Goal: real accounts, private and public decks, study groups with roles, and no w
 
 **Authentication vs authorization; sessions vs JWT; OAuth vs OIDC; password hashing.** All explained in CrewFlow phase 3. Your ADR answers: why sessions for a single web app, why you built auth yourself (to learn) and when you'd buy it instead.
 
-**Authorization models.** *RBAC* (role-based): a group owner can remove members. *ABAC / resource-based*: a user can edit a deck if they are its author. Rehearse needs both: "can edit" depends on ownership, "can kick" depends on a role. Put all rules in one place so they're testable.
+**Authorization models.** _RBAC_ (role-based): a group owner can remove members. _ABAC / resource-based_: a user can edit a deck if they are its author. Rehearse needs both: "can edit" depends on ownership, "can kick" depends on a role. Put all rules in one place so they're testable.
 
 **IDOR (broken access control), the #1 OWASP risk.** Changing `/decks/41` to `/decks/42` must not show a private deck. Return 404 (not 403) for private resources you don't own, so you don't even reveal they exist. Test this for every endpoint.
 
@@ -290,7 +290,7 @@ Goal: refactor the MVP so the core logic is framework-free and covered by tests 
 
 **Strategy pattern, for real.** SM-2 and FSRS are two strategies behind one interface. A user setting chooses which one. Adding a third algorithm means adding one class, without editing existing ones: that's the Open/Closed principle in action.
 
-**Other patterns in Rehearse:** *Repository* (data access), *Adapter* (wrap the speech-to-text and LLM SDKs behind your interfaces so you can switch vendors), *Factory* (create the right importer for CSV vs Anki files), *Observer / domain events* (`ReviewRecorded` → update streak, update leaderboard, check achievements, without the review code knowing about them).
+**Other patterns in Rehearse:** _Repository_ (data access), _Adapter_ (wrap the speech-to-text and LLM SDKs behind your interfaces so you can switch vendors), _Factory_ (create the right importer for CSV vs Anki files), _Observer / domain events_ (`ReviewRecorded` → update streak, update leaderboard, check achievements, without the review code knowing about them).
 
 **SOLID with Rehearse examples.** S: `StreakCalculator` only calculates streaks. O: new algorithms as new strategies. L: every `SchedulingAlgorithm` must return a due date in the future. I: the study page depends on a small `StudyQueueReader`, not the whole deck service. D: use cases depend on interfaces, not on Kysely.
 
@@ -386,7 +386,7 @@ Goal: move slow work to background workers, add caching and rate limits, and bui
 
 **Why a queue for transcription.** A speech-to-text call can take seconds and sometimes fails. Doing it inside the HTTP request makes the user wait and breaks on timeouts. With a queue, the API answers "accepted" (202) immediately, the worker does the work, and the UI updates when it's done. Workers scale separately from the API.
 
-**At-least-once + idempotency.** BullMQ can run a job twice (a worker crashed after calling the API but before marking it done). Each paid call must be safe to repeat: check `attempt.status` and store the transcript with the attempt ID as a unique key before moving on. Exactly-once *effect* = at-least-once delivery + idempotent handler.
+**At-least-once + idempotency.** BullMQ can run a job twice (a worker crashed after calling the API but before marking it done). Each paid call must be safe to repeat: check `attempt.status` and store the transcript with the attempt ID as a unique key before moving on. Exactly-once _effect_ = at-least-once delivery + idempotent handler.
 
 **Retries.** Retry transient errors (timeouts, 429, 503) with exponential backoff + jitter; don't retry permanent ones (invalid audio). After N tries, dead-letter queue + user-visible "failed, retry?" button.
 
@@ -475,7 +475,7 @@ Goal: production on AWS, all in Terraform, with a cost model that tells you what
 
 **AWS building blocks and compute options** (regions/AZs, VPC, subnets, security groups, EC2 vs Fargate vs Lambda vs EKS, IaC and state): explained in CrewFlow phase 8.
 
-**Scaling workers on the right signal.** API load shows up as CPU and request count. Worker load shows up as *queue backlog*: 500 transcription jobs waiting while CPU is low (workers wait on external APIs). Scale on "jobs waiting per worker" with a custom CloudWatch metric. Knowing which signal to scale on is a real-world skill.
+**Scaling workers on the right signal.** API load shows up as CPU and request count. Worker load shows up as _queue backlog_: 500 transcription jobs waiting while CPU is low (workers wait on external APIs). Scale on "jobs waiting per worker" with a custom CloudWatch metric. Knowing which signal to scale on is a real-world skill.
 
 **Could transcription be Lambda?** Each job is short and spiky: a good Lambda fit in theory (scales to zero). But you need ffmpeg (possible with a container-image Lambda), and you already run BullMQ on Redis. Write the ADR comparing both; either answer is fine if you defend it with cost and complexity.
 
@@ -528,7 +528,7 @@ Goal: a Pro subscription plus AI credits that are never lost, never double-spent
 
 **Usage-based billing.** Many AI products charge per use (credits, tokens, minutes). Design questions: what happens at 0 credits mid-session? Do monthly credits roll over or expire? Which credits are spent first (expiring ones first)? Each is a product decision with a technical consequence: write them down.
 
-**DDD bounded contexts in Rehearse.** *Learning* (decks, cards, reviews), *Practice* (attempts, grading, mock interviews), *Billing* (plans, credits, Stripe), *Identity* (users, groups). "User" means different things in each. Contexts talk through events (`AttemptGraded` → Billing captures the credit) or narrow interfaces. *Aggregates*: an `Attempt` with its grading result changes as one unit; a `CreditAccount` enforces "balance never below zero" inside one transaction.
+**DDD bounded contexts in Rehearse.** _Learning_ (decks, cards, reviews), _Practice_ (attempts, grading, mock interviews), _Billing_ (plans, credits, Stripe), _Identity_ (users, groups). "User" means different things in each. Contexts talk through events (`AttemptGraded` → Billing captures the credit) or narrow interfaces. _Aggregates_: an `Attempt` with its grading result changes as one unit; a `CreditAccount` enforces "balance never below zero" inside one transaction.
 
 **Outbox pattern.** Insert the business change and the event in the same transaction; a relay publishes events afterward. Solves the dual-write problem (DB updated but event lost, or the reverse).
 
@@ -577,7 +577,7 @@ Goal: see every request and every job end to end, alert on what users feel, and 
 
 **New here: tracing across a queue.** A normal trace ends when the HTTP response is sent, but your grading continues in a worker minutes later. Put the trace context (`traceparent`) into the job payload and continue it in the worker, so one trace shows the user's click, the queue wait time and each AI call. "Queue wait time" is the metric that tells you when to add workers.
 
-**SLOs for async work.** Latency SLOs for APIs are about milliseconds; for jobs they're about *freshness*: "95% of gradings done within 60 seconds of upload". Measure job age (now − enqueued time), not only job duration.
+**SLOs for async work.** Latency SLOs for APIs are about milliseconds; for jobs they're about _freshness_: "95% of gradings done within 60 seconds of upload". Measure job age (now − enqueued time), not only job duration.
 
 **Third-party dependency failures.** You don't control the AI providers. Plan for slowness (timeouts), errors (retries + circuit breaker), and long outages (queue keeps jobs, user is told, credits are released if it never completes). Bulkheads: a separate queue per job type, so a stuck grading queue doesn't block reminder emails.
 
@@ -669,7 +669,7 @@ Goal: AI features you use every week, that are measurably good, cheap enough to 
 
 **LLM calls, streaming, embeddings, vector search, RAG, tool calling and agents, prompt injection, cost control.** Explained in CrewFlow phase 12. What's new here:
 
-**LLM-as-a-judge.** Using a model to grade answers is useful but unreliable unless you design it well: give a clear rubric with examples of each score, ask for reasoning *before* the score, use structured output, keep temperature low, and measure agreement with human grades (yours). Known biases: preferring longer answers, being too generous. Your eval set tells you if that's happening.
+**LLM-as-a-judge.** Using a model to grade answers is useful but unreliable unless you design it well: give a clear rubric with examples of each score, ask for reasoning _before_ the score, use structured output, keep temperature low, and measure agreement with human grades (yours). Known biases: preferring longer answers, being too generous. Your eval set tells you if that's happening.
 
 **Structured outputs.** You need JSON your code can trust: `{ accuracy: 1-5, missing: string[], grammarFixes: {original, corrected, tip}[] }`. Use the provider's structured-output / JSON-schema mode, validate with Zod anyway, and handle the rare invalid response (retry once, then fail gracefully and release the credit).
 
@@ -722,11 +722,11 @@ Goal: solve NeetCode-style problems inside Rehearse in TypeScript or Python, run
 
 **Defense in depth for untrusted code.**
 
-- *Isolation*: a new container per run, destroyed after; never the API's container or host. Stronger options: gVisor (a user-space kernel) or Firecracker microVMs. Know that plain containers share the host kernel, so a kernel bug can be an escape route.
-- *No network*: `--network none`, so no data theft or internal calls (SSRF).
-- *Limits*: CPU and memory caps (cgroups), max process count (stops fork bombs), wall-clock timeout (kill after 5 s), max output size, read-only filesystem except a small temp dir.
-- *Least privilege*: non-root user, dropped Linux capabilities, a seccomp profile blocking dangerous system calls, no secrets in the environment.
-- *Separation*: runners on separate machines with no IAM permissions, so a full escape still reaches nothing valuable.
+- _Isolation_: a new container per run, destroyed after; never the API's container or host. Stronger options: gVisor (a user-space kernel) or Firecracker microVMs. Know that plain containers share the host kernel, so a kernel bug can be an escape route.
+- _No network_: `--network none`, so no data theft or internal calls (SSRF).
+- _Limits_: CPU and memory caps (cgroups), max process count (stops fork bombs), wall-clock timeout (kill after 5 s), max output size, read-only filesystem except a small temp dir.
+- _Least privilege_: non-root user, dropped Linux capabilities, a seccomp profile blocking dangerous system calls, no secrets in the environment.
+- _Separation_: runners on separate machines with no IAM permissions, so a full escape still reaches nothing valuable.
 
 **Queue design for the runner.** Code jobs get their own queue and worker pool (a bulkhead): a flood of submissions can't delay transcriptions. Show "Running..." with a position in the queue. Rate-limit submissions per user.
 
@@ -765,7 +765,7 @@ Goal: study anywhere without signal, respect user data like a serious company, m
 - Reviews made offline are saved locally as events with UUIDs and timestamps, then synced when back online
 - Background sync; a visible "3 reviews waiting to sync" badge
 
-**Concepts.** *Service worker*: a script between your app and the network that can serve cached responses. Caching strategies: cache-first (app shell), network-first (fresh data), stale-while-revalidate. **Sync conflicts**: you review a card offline on your phone and online on your laptop. Because reviews are append-only events with IDs (phase 1), sync = upload missing events (idempotent) and recompute the card state from the merged log in time order. No "last write wins" data loss. This is a simplified version of how collaborative and offline apps work (event logs, CRDTs). Explaining it well is impressive.
+**Concepts.** _Service worker_: a script between your app and the network that can serve cached responses. Caching strategies: cache-first (app shell), network-first (fresh data), stale-while-revalidate. **Sync conflicts**: you review a card offline on your phone and online on your laptop. Because reviews are append-only events with IDs (phase 1), sync = upload missing events (idempotent) and recompute the card state from the merged log in time order. No "last write wins" data loss. This is a simplified version of how collaborative and offline apps work (event logs, CRDTs). Explaining it well is impressive.
 
 ### 14b. Compliance and privacy
 
@@ -843,13 +843,13 @@ Decisions with written reasons (45+ ADRs). Saying no to features with reasons (f
 
 The weekly tracks keep you interview-ready from month 3. Most of them now happen inside Rehearse itself.
 
-| Track | Weekly time | What | Where |
-| --- | --- | --- | --- |
-| Dogfooding | 1 h | One real study session; log every bug and feature idea as an issue | Rehearse |
-| DSA | 3 h | NeetCode 150 in order; say the Big O out loud | Rehearse runner (from phase 13; before that, NeetCode) |
-| Speaking | 1 h | 3 questions from the current phase, answered out loud and recorded | Rehearse speak mode (from phase 5) |
-| Networking + Linux/OS | 1 h | DNS, TCP, TLS, HTTP/2-3, load balancers; processes, signals, permissions, threads | Cards in Rehearse |
-| Behavioral | 30 min | One STAR story per finished phase | Cards in Rehearse |
+| Track                 | Weekly time | What                                                                              | Where                                                  |
+| --------------------- | ----------- | --------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| Dogfooding            | 1 h         | One real study session; log every bug and feature idea as an issue                | Rehearse                                               |
+| DSA                   | 3 h         | NeetCode 150 in order; say the Big O out loud                                     | Rehearse runner (from phase 13; before that, NeetCode) |
+| Speaking              | 1 h         | 3 questions from the current phase, answered out loud and recorded                | Rehearse speak mode (from phase 5)                     |
+| Networking + Linux/OS | 1 h         | DNS, TCP, TLS, HTTP/2-3, load balancers; processes, signals, permissions, threads | Cards in Rehearse                                      |
+| Behavioral            | 30 min      | One STAR story per finished phase                                                 | Cards in Rehearse                                      |
 
 ### On your CV
 
@@ -863,15 +863,15 @@ Put Rehearse in a **Projects** section at the top. Don't list it as a job you ha
 
 ### Story bank (STAR)
 
-| Question | Your Rehearse story |
-| --- | --- |
-| Hardest bug | Two-device lost update on card schedules (phase 11) |
-| Production incident | LLM provider outage game day + postmortem (phase 10) |
-| Security | Code runner threat model; IDOR tests; XSS in public decks |
+| Question               | Your Rehearse story                                       |
+| ---------------------- | --------------------------------------------------------- |
+| Hardest bug            | Two-device lost update on card schedules (phase 11)       |
+| Production incident    | LLM provider outage game day + postmortem (phase 10)      |
+| Security               | Code runner threat model; IDOR tests; XSS in public decks |
 | Cost/business decision | Unit economics that led to the credit system (phases 8–9) |
-| Measuring quality | Grader evals and the cheaper-model decision (phase 12) |
-| Users and product | A feature friends asked for that you refused, and why |
-| Collaboration | Your open-source PR review |
+| Measuring quality      | Grader evals and the cheaper-model decision (phase 12)    |
+| Users and product      | A feature friends asked for that you refused, and why     |
+| Collaboration          | Your open-source PR review                                |
 
 ### The 5-minute demo
 
@@ -885,13 +885,13 @@ Put Rehearse in a **Projects** section at the top. Don't list it as a job you ha
 
 At 10–15 hours a week the plan takes about 49 weeks; with your work schedule, 15–18 months is fine. You start studying in your own app at week 8 and applying at week 12.
 
-> *Diagram: Rehearse roadmap · 16 phases, 3 checkpoints (view it in the original doc)*
+> _Diagram: Rehearse roadmap · 16 phases, 3 checkpoints (view it in the original doc)_
 
-| Checkpoint | Week | Must be true | Then |
-| --- | --- | --- | --- |
-| Using it yourself | 8 | Your seed deck studied in your own app | Weekly dogfooding starts; issues pile up naturally |
-| MVP live | 12 | Deployed, 3+ real users, phases 0–3 cards mastered | Rehearse on your CV; apply to junior and apprenticeship roles |
-| Production on AWS | 26 | Speak mode, queues, Terraform, CI/CD, 25+ ADRs | Apply to full-stack and backend/cloud roles |
-| Complete | 49 | Credits, AI grading with evals, code runner, offline, postmortem, RFC | Mid-level and senior-track conversations |
+| Checkpoint        | Week | Must be true                                                          | Then                                                          |
+| ----------------- | ---- | --------------------------------------------------------------------- | ------------------------------------------------------------- |
+| Using it yourself | 8    | Your seed deck studied in your own app                                | Weekly dogfooding starts; issues pile up naturally            |
+| MVP live          | 12   | Deployed, 3+ real users, phases 0–3 cards mastered                    | Rehearse on your CV; apply to junior and apprenticeship roles |
+| Production on AWS | 26   | Speak mode, queues, Terraform, CI/CD, 25+ ADRs                        | Apply to full-stack and backend/cloud roles                   |
+| Complete          | 49   | Credits, AI grading with evals, code runner, offline, postmortem, RFC | Mid-level and senior-track conversations                      |
 
 **If you fall behind:** cut scope, never understanding. Drop the Kubernetes lab and quiz rooms first. Never skip phases 1, 3, 6, 9 and 12: they hold the most-asked interview questions and the core of the app.
